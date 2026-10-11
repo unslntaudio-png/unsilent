@@ -212,6 +212,13 @@ footer{padding-bottom:calc(86px + env(safe-area-inset-bottom))}
 .wa-btn{margin-top:24px;width:100%;justify-content:center}
 }
 @media (prefers-reduced-motion:reduce){.js .rvl{opacity:1;translate:none;transition:none}.cta{transition:none}}
+.telw{position:relative;z-index:30;display:inline-block}
+.tel{background:none;border:0;padding:0;cursor:pointer;text-align:left}
+.tel::after{content:"\25BE";margin-left:10px;font-size:.7em;opacity:.7}
+.telm{position:absolute;left:0;top:calc(100% + 10px);z-index:20;min-width:210px;background:#141417;border:1px solid #2c2c32;border-radius:18px;padding:8px;box-shadow:0 18px 50px #000a}
+.telm[hidden]{display:none}
+.telm a{display:block;padding:14px 18px;border-radius:12px;font-family:'Unbounded',sans-serif;font-size:14px;color:var(--ink)}
+.telm a:hover,.telm a:focus-visible{background:var(--y);color:var(--bg)}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "UNSLNT.", "url": "https://unslnt.netlify.app/", "description": "UNSLNT is a sync music studio founded by Tom Rosenberg. Original music for film, television, advertising and visual storytelling.", "email": "unslnt.audio@gmail.com", "telephone": "+972509150047", "founder": {"@type": "Person", "name": "Tom Rosenberg"}}</script>
 </head>
@@ -260,7 +267,7 @@ footer{padding-bottom:calc(86px + env(safe-area-inset-bottom))}
 <div class="k uf">CONTACT</div>
 <div class="who">Tom Rosenberg</div>
 <a class="mail" href="mailto:unslnt.audio@gmail.com">unslnt.audio<wbr>@gmail.com</a>
-<a class="tel" href="tel:+972509150047">+972-50-915-0047</a>
+<div class="telw"><button class="tel" id="telb" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="telm">+972-50-915-0047</button><div class="telm" id="telm" role="menu" hidden><a role="menuitem" href="tel:+972509150047">Call</a><a role="menuitem" href="sms:+972509150047">Send SMS</a><a role="menuitem" href="https://wa.me/972509150047?text=Hi%20Tom%2C%20I%27d%20like%20to%20talk%20about%20music%20for%20a%20project." target="_blank" rel="noopener">WhatsApp</a></div></div>
 <a class="wa-btn" href="https://wa.me/972509150047?text=Hi%20Tom%2C%20I%27d%20like%20to%20talk%20about%20music%20for%20a%20project." target="_blank" rel="noopener">Message on WhatsApp ↗</a>
 </section>
 </main>
@@ -409,6 +416,12 @@ document.addEventListener('error',function(e){var t=e.target;if(isThumb(t))nextT
  new MutationObserver(watch).observe(document.querySelector('main'),{childList:true,subtree:true});
  setTimeout(function(){if(!fired)document.querySelectorAll('.rvl').forEach(function(n){n.classList.add('in')})},3500);
 })();
+(function(){var b=document.getElementById('telb'),m=document.getElementById('telm');if(!b||!m)return;
+ function set(o){m.hidden=!o;b.setAttribute('aria-expanded',o?'true':'false')}
+ b.addEventListener('click',function(e){e.stopPropagation();set(m.hidden)});
+ document.addEventListener('click',function(e){if(!m.hidden&&!m.contains(e.target))set(false)});
+ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!m.hidden){set(false);b.focus()}});
+ m.addEventListener('click',function(){setTimeout(function(){set(false)},50)})})();
 </script>
 </body>
 </html>
