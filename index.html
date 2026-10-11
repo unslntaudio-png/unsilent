@@ -2,11 +2,28 @@
 <html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#08080a">
 <title>UNSLNT. — Music for ads &amp; series</title>
-<meta name="description" content="UNSLNT. — we make brands heard. Original music for commercials and TV series.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='34' fill='%23e2dc00'/%3E%3C/svg%3E">
+<meta name="description" content="UNSLNT is a sync music studio founded by Tom Rosenberg. Original music for film, television, advertising and visual storytelling.">
+<link rel="canonical" href="https://unslnt.netlify.app/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="UNSLNT.">
+<meta property="og:title" content="UNSLNT. — we make brands heard.">
+<meta property="og:description" content="Sync music studio. Original music for film, television, advertising and visual storytelling.">
+<meta property="og:url" content="https://unslnt.netlify.app/">
+<meta property="og:image" content="https://unslnt.netlify.app/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="UNSLNT. logo — sync music studio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="UNSLNT. — we make brands heard.">
+<meta name="twitter:description" content="Sync music studio. Original music for film, television, advertising and visual storytelling.">
+<meta name="twitter:image" content="https://unslnt.netlify.app/og.jpg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://i.ytimg.com">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&family=Heebo:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
@@ -177,9 +194,27 @@ section[id]{scroll-margin-top:72px}
 nav.top.stuck .mp{position:absolute;left:0;right:0;top:100%;width:auto;padding:12px 22px 16px;background:rgba(8,8,10,.96);border-bottom:1px solid #222226}
 }
 @media (prefers-reduced-transparency:reduce){nav.top.stuck{background:#08080a}}
+.skip{position:absolute;left:12px;top:-60px;z-index:200;background:var(--y);color:var(--bg);padding:12px 20px;border-radius:999px;font-family:'Unbounded',sans-serif;font-size:13px;transition:top .2s}
+.skip:focus{top:12px}
+.wa-btn{display:inline-flex;align-items:center;margin-top:30px;min-height:48px;padding:0 28px;border-radius:999px;background:var(--y);color:var(--bg);font-family:'Unbounded',sans-serif;font-weight:500;font-size:14px;transition:transform .25s,box-shadow .25s}
+.wa-btn:hover,.wa-btn:focus-visible{transform:translateY(-3px);box-shadow:0 10px 30px #e2dc0033}
+.cta{display:none}
+.js .rvl{opacity:0;translate:0 26px;transition:opacity .8s ease,translate .8s cubic-bezier(.2,.8,.2,1),transform .35s,border-color .35s}
+.js .rvl.in{opacity:1;translate:0 0}
+@media (max-width:820px){
+.cta{display:flex;position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:40;gap:6px;padding:6px;border-radius:999px;background:rgba(16,16,19,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid #2a2a30;transform:translateY(150%);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.cta.on{transform:none}
+.cta a{flex:1;min-height:46px;display:flex;align-items:center;justify-content:center;border-radius:999px;font-family:'Unbounded',sans-serif;font-weight:500;font-size:12.5px;color:var(--ink)}
+.cta a.wa{background:var(--y);color:var(--bg)}
+footer{padding-bottom:calc(86px + env(safe-area-inset-bottom))}
+.wa-btn{margin-top:24px;width:100%;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){.js .rvl{opacity:1;translate:none;transition:none}.cta{transition:none}}
 </style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "UNSLNT.", "url": "https://unslnt.netlify.app/", "description": "UNSLNT is a sync music studio founded by Tom Rosenberg. Original music for film, television, advertising and visual storytelling.", "email": "unslnt.audio@gmail.com", "telephone": "+972509150047", "founder": {"@type": "Person", "name": "Tom Rosenberg"}}</script>
 </head>
 <body>
+<a class="skip" href="#ads">Skip to content</a>
 <nav class="top pad" aria-label="Main">
 <div class="left"><button class="mb" id="mb" aria-label="Menu" aria-expanded="true" aria-controls="mp"><span class="nl"><i class="w"></i><i class="y"></i></span></button>
 <div class="mp" id="mp" role="menu">
@@ -219,9 +254,11 @@ nav.top.stuck .mp{position:absolute;left:0;right:0;top:100%;width:auto;padding:1
 <div class="who">Tom Rosenberg</div>
 <a class="mail" href="mailto:unslnt.audio@gmail.com">unslnt.audio<wbr>@gmail.com</a>
 <a class="tel" href="tel:+972509150047">050-915-0047</a>
+<a class="wa-btn" href="https://wa.me/972509150047?text=Hi%20Tom%2C%20I%27d%20like%20to%20talk%20about%20music%20for%20a%20project." target="_blank" rel="noopener">Message on WhatsApp ↗</a>
 </section>
 </main>
 <footer class="pad"><i role="img" aria-label="UNSLNT."></i><span class="uf">we make brands heard.</span></footer>
+<nav class="cta" id="cta" aria-label="Quick contact"><a href="tel:+972509150047">Call</a><a class="wa" href="https://wa.me/972509150047?text=Hi%20Tom%2C%20I%27d%20like%20to%20talk%20about%20music%20for%20a%20project." target="_blank" rel="noopener">WhatsApp</a><a href="mailto:unslnt.audio@gmail.com">Email</a></nav>
 <script>
 /* ===== PORTFOLIO — add new works here =====
    cat: 'ads' or 'series'  |  id: YouTube video id (the part after v=)
@@ -333,6 +370,23 @@ document.addEventListener('error',function(e){var t=e.target;if(isThumb(t))nextT
  mp.addEventListener('click',function(e){if(e.target.closest('a')&&mq.matches&&was)setMenu(false)});
  mq.addEventListener('change',function(){if(!mq.matches)setMenu(true);else setMenu(!was)});
  addEventListener('scroll',req,{passive:true});upd();
+})();
+
+(function(){
+ /* gentle reveal on scroll - only enabled when the browser supports it, with a failsafe so nothing can stay hidden */
+ var els=function(root){return (root||document).querySelectorAll('.sh,.card,.ab>*,.contact>*')};
+ var cta=document.getElementById('cta'),contact=document.getElementById('contact');
+ function toggleCta(){
+  var y=window.scrollY||0,c=contact?contact.getBoundingClientRect().top:1e9;
+  cta.classList.toggle('on',y>520&&c>innerHeight*.8)}
+ addEventListener('scroll',toggleCta,{passive:true});addEventListener('resize',toggleCta);toggleCta();
+ if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+ document.documentElement.classList.add('js');
+ var fired=false,io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){fired=true;e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+ function watch(){els().forEach(function(n){if(!n.classList.contains('rvl')){n.classList.add('rvl');io.observe(n)}})}
+ watch();
+ new MutationObserver(watch).observe(document.querySelector('main'),{childList:true,subtree:true});
+ setTimeout(function(){if(!fired)document.querySelectorAll('.rvl').forEach(function(n){n.classList.add('in')})},3500);
 })();
 </script>
 </body>
