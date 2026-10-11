@@ -215,10 +215,13 @@ footer{padding-bottom:calc(86px + env(safe-area-inset-bottom))}
 .telw{position:relative;z-index:30;display:inline-block}
 .tel{background:none;border:0;padding:0;cursor:pointer;text-align:left}
 .tel::after{content:"\25BE";margin-left:10px;font-size:.7em;opacity:.7}
-.telm{position:absolute;left:0;top:calc(100% + 10px);z-index:20;min-width:210px;background:#141417;border:1px solid #2c2c32;border-radius:18px;padding:8px;box-shadow:0 18px 50px #000a}
+.telm{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:200;width:min(340px,calc(100vw - 48px));background:#141417;border:1px solid #2c2c32;border-radius:24px;padding:14px;box-shadow:0 0 0 100vmax #000b,0 30px 80px #000c}
 .telm[hidden]{display:none}
-.telm a{display:block;padding:14px 18px;border-radius:12px;font-family:'Unbounded',sans-serif;font-size:14px;color:var(--ink)}
+.telm .tt{padding:10px 16px 14px;font-family:'Unbounded',sans-serif;font-size:13px;color:#a8a6a0;text-align:center}
+.telm a{display:block;padding:16px 18px;margin-top:6px;border-radius:14px;text-align:center;background:#1d1d21;font-family:'Unbounded',sans-serif;font-size:15px;color:var(--ink)}
+.telm .tx{display:block;width:100%;margin-top:12px;padding:12px;background:none;border:0;color:#8a8a92;font-family:inherit;font-size:13px;cursor:pointer}
 .telm a:hover,.telm a:focus-visible{background:var(--y);color:var(--bg)}
+.telw{z-index:auto}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "UNSLNT.", "url": "https://unslnt.netlify.app/", "description": "UNSLNT is a sync music studio founded by Tom Rosenberg. Original music for film, television, advertising and visual storytelling.", "email": "unslnt.audio@gmail.com", "telephone": "+972509150047", "founder": {"@type": "Person", "name": "Tom Rosenberg"}}</script>
 </head>
@@ -267,7 +270,7 @@ footer{padding-bottom:calc(86px + env(safe-area-inset-bottom))}
 <div class="k uf">CONTACT</div>
 <div class="who">Tom Rosenberg</div>
 <a class="mail" href="mailto:unslnt.audio@gmail.com">unslnt.audio<wbr>@gmail.com</a>
-<div class="telw"><button class="tel" id="telb" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="telm">+972-50-915-0047</button><div class="telm" id="telm" role="menu" hidden><a role="menuitem" href="tel:+972509150047">Call</a><a role="menuitem" href="sms:+972509150047">Send SMS</a><a role="menuitem" href="https://wa.me/972509150047?text=Hi%20Tom%2C%20I%27d%20like%20to%20talk%20about%20music%20for%20a%20project." target="_blank" rel="noopener">WhatsApp</a></div></div>
+<div class="telw"><button class="tel" id="telb" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="telm">+972-50-915-0047</button><div class="telm" id="telm" role="dialog" aria-modal="true" aria-label="Contact Tom" hidden><div class="tt">+972-50-915-0047</div><a href="tel:+972509150047">Call</a><a href="sms:+972509150047">Send SMS</a><a href="https://wa.me/972509150047?text=Hi%20Tom%2C%20I%27d%20like%20to%20talk%20about%20music%20for%20a%20project." target="_blank" rel="noopener">WhatsApp</a><button type="button" class="tx" id="telx">Close</button></div></div>
 </section>
 </main>
 <footer class="pad"><i role="img" aria-label="UNSLNT."></i><span class="uf">we make brands heard.</span></footer>
@@ -415,8 +418,9 @@ document.addEventListener('error',function(e){var t=e.target;if(isThumb(t))nextT
  new MutationObserver(watch).observe(document.querySelector('main'),{childList:true,subtree:true});
  setTimeout(function(){if(!fired)document.querySelectorAll('.rvl').forEach(function(n){n.classList.add('in')})},3500);
 })();
-(function(){var b=document.getElementById('telb'),m=document.getElementById('telm');if(!b||!m)return;
- function set(o){m.hidden=!o;b.setAttribute('aria-expanded',o?'true':'false')}
+(function(){var b=document.getElementById('telb'),m=document.getElementById('telm');if(!b||!m)return;document.body.appendChild(m);/* body-level so animated ancestors can't offset the fixed dialog */
+ function set(o){m.hidden=!o;b.setAttribute('aria-expanded',o?'true':'false');if(o){var f=m.querySelector('a');if(f)f.focus()}}
+ var x=document.getElementById('telx');if(x)x.addEventListener('click',function(){set(false);b.focus()});
  b.addEventListener('click',function(e){e.stopPropagation();set(m.hidden)});
  document.addEventListener('click',function(e){if(!m.hidden&&!m.contains(e.target))set(false)});
  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!m.hidden){set(false);b.focus()}});
