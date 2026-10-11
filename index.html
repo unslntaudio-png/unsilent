@@ -303,6 +303,7 @@ function cardTransform(frame){
  return 'translate('+(c.left-f.left)+'px,'+(c.top-f.top)+'px) scale('+(c.width/f.width)+','+(c.height/f.height)+')'}
 function openTheater(b){
  var id=b.dataset.id,vm=b.dataset.vimeo;
+ if(vm&&b.dataset.vimeoOpen){window.open('https://vimeo.com/'+vm,'_blank','noopener');return}
  if(!/^https?:$/.test(location.protocol)){window.open(vm?'https://vimeo.com/'+vm:'https://www.youtube.com/watch?v='+id,'_blank','noopener');return}
  /* YouTube refuses embeds with no web origin (file:// or sandboxed previews, error 153) - open the video itself instead */
  if(!/^https?:$/.test(location.protocol)){window.open('https://www.youtube.com/watch?v='+id,'_blank','noopener');return}
@@ -345,8 +346,8 @@ document.addEventListener('click',function(e){
  var b=e.target.closest('.vid');if(!b)return;
  openTheater(b)});
 document.querySelectorAll('.vid[data-vimeo]').forEach(function(b){var im=b.querySelector('img');if(!im||im.getAttribute('src'))return;
- fetch('https://vimeo.com/api/oembed.json?width=1280&url='+encodeURIComponent('https://vimeo.com/'+b.dataset.vimeo)).then(function(r){return r.json()}).then(function(d){
-  var u=d&&d.thumbnail_url;if(u)im.src=u.replace(/_\d+x\d+/,'_1280')}).catch(function(){b.classList.add('nopic')})});
+ fetch('https://vimeo.com/api/oembed.json?width=1280&url='+encodeURIComponent('https://vimeo.com/'+b.dataset.vimeo)).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){
+  var u=d&&d.thumbnail_url;if(u)im.src=u.replace(/_\d+x\d+/,'_1280')}).catch(function(){b.classList.add('nopic');b.dataset.vimeoOpen='1'})});
 var THUMBS=['maxresdefault','sddefault','hqdefault'];
 function nextThumb(t){
  var m=t.src.match(/\/vi\/([^\/]+)\/(maxresdefault|sddefault|hqdefault)\.jpg/);
