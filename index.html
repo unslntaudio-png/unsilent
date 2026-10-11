@@ -24,6 +24,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://i.ytimg.com">
+<link rel="preconnect" href="https://i.vimeocdn.com">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&family=Heebo:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
@@ -261,11 +262,11 @@ footer{padding-bottom:calc(86px + env(safe-area-inset-bottom))}
 <nav class="cta" id="cta" aria-label="Quick contact"><a href="tel:+972509150047">Call</a><a class="wa" href="https://wa.me/972509150047?text=Hi%20Tom%2C%20I%27d%20like%20to%20talk%20about%20music%20for%20a%20project." target="_blank" rel="noopener">WhatsApp</a><a href="mailto:unslnt.audio@gmail.com">Email</a></nav>
 <script>
 /* ===== PORTFOLIO — add new works here =====
-   cat: 'ads' or 'series'  |  id: YouTube video id (the part after v=)
+   cat: 'ads' or 'series'  |  id: YouTube video id (the part after v=)  |  or vimeo: Vimeo video id
    title / sub: text shown on the card  |  thumb: optional custom image (path or URL)
    Both categories use the same card layout. */
 var WORKS=[
- {cat:'ads',id:'nNV2H3Qergk',title:'Castro',sub:'Holiday Collection'},
+ {cat:'ads',vimeo:'1234811623',title:'Castro',sub:'Holiday Collection'},
  {cat:'ads',id:'3ipib7w7iy0',title:'URBANICA',sub:'Summer Collection'},
  {cat:'series',id:'anj3M--m2ts',title:'Kfula 5',sub:'Noa Kirel \u2014 Childhood Song'},
  {cat:'series',id:'cltivBGwDBA',title:'Kfula 5',sub:'You'}
@@ -273,10 +274,11 @@ var WORKS=[
 var CATS={ads:{el:'w-ads',feature:false},series:{el:'w-series',feature:false}},LIMIT=6;
 var PLAY='<span class="pl"><svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#08080a"/></svg></span>';
 function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-function vid(w){return '<div class="vwrap"><button class="vid" data-id="'+w.id+'" aria-label="Play video: '+esc(w.title+' - '+(w.sub||''))+'"><img src="'+(w.thumb||'https://i.ytimg.com/vi/'+w.id+'/maxresdefault.jpg')+'" alt="" loading="lazy">'+PLAY+'</button></div>'}
-function link(w){return 'https://www.youtube.com/watch?v='+w.id}
-function card(w){return '<article class="card">'+vid(w)+'<div class="meta"><div><h3>'+esc(w.title)+'</h3><small>'+esc(w.sub||'')+'</small></div><a href="'+link(w)+'" target="_blank" rel="noopener">YouTube \u2197</a></div></article>'}
-function feat(w){return '<article class="ub feat"><div><h3>'+esc(w.title)+'</h3><p>'+esc(w.sub||'')+'</p><a href="'+link(w)+'" target="_blank" rel="noopener">Watch on YouTube \u2197</a></div>'+vid(w)+'</article>'}
+function vid(w){var v=w.vimeo?' data-vimeo="'+w.vimeo+'"':'';return '<div class="vwrap"><button class="vid" data-id="'+(w.id||'')+'"'+v+' aria-label="Play video: '+esc(w.title+' - '+(w.sub||''))+'"><img '+(w.vimeo&&!w.thumb?'':'src="'+(w.thumb||'https://i.ytimg.com/vi/'+w.id+'/maxresdefault.jpg')+'" ')+'alt="" loading="lazy">'+PLAY+'</button></div>'}
+function link(w){return w.vimeo?'https://vimeo.com/'+w.vimeo:'https://www.youtube.com/watch?v='+w.id}
+function site(w){return w.vimeo?'Vimeo':'YouTube'}
+function card(w){return '<article class="card">'+vid(w)+'<div class="meta"><div><h3>'+esc(w.title)+'</h3><small>'+esc(w.sub||'')+'</small></div><a href="'+link(w)+'" target="_blank" rel="noopener">'+site(w)+' \u2197</a></div></article>'}
+function feat(w){return '<article class="ub feat"><div><h3>'+esc(w.title)+'</h3><p>'+esc(w.sub||'')+'</p><a href="'+link(w)+'" target="_blank" rel="noopener">Watch on '+site(w)+' \u2197</a></div>'+vid(w)+'</article>'}
 function render(cat,all){
  var c=CATS[cat],el=document.getElementById(c.el),list=WORKS.filter(function(w){return w.cat===cat}),h='';
  if(c.feature&&list.length){h+=feat(list[0]);list=list.slice(1)}
@@ -290,7 +292,8 @@ function cardTransform(frame){
  var c=theaterCard.getBoundingClientRect(),f=frame.getBoundingClientRect();
  return 'translate('+(c.left-f.left)+'px,'+(c.top-f.top)+'px) scale('+(c.width/f.width)+','+(c.height/f.height)+')'}
 function openTheater(b){
- var id=b.dataset.id;
+ var id=b.dataset.id,vm=b.dataset.vimeo;
+ if(!/^https?:$/.test(location.protocol)){window.open(vm?'https://vimeo.com/'+vm:'https://www.youtube.com/watch?v='+id,'_blank','noopener');return}
  /* YouTube refuses embeds with no web origin (file:// or sandboxed previews, error 153) - open the video itself instead */
  if(!/^https?:$/.test(location.protocol)){window.open('https://www.youtube.com/watch?v='+id,'_blank','noopener');return}
  if(theater)return;
@@ -305,7 +308,7 @@ function openTheater(b){
  var frame=theater.querySelector('.tframe'),box=theater.querySelector('.tvid'),started=false;
  function start(){if(started||!theater)return;started=true;
   var f=document.createElement('iframe');
-  f.src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&playsinline=1&origin='+encodeURIComponent(location.origin);
+  f.src=vm?'https://player.vimeo.com/video/'+vm+'?autoplay=1&title=0&byline=0&portrait=0':'https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&playsinline=1&origin='+encodeURIComponent(location.origin);
   f.title=title;f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;f.referrerPolicy='strict-origin-when-cross-origin';
   box.innerHTML='';box.appendChild(f)}
  if(reduce){theater.classList.add('on');start()}
@@ -331,6 +334,9 @@ document.addEventListener('click',function(e){
  var m=e.target.closest('.more');if(m){render(m.dataset.cat,true);return}
  var b=e.target.closest('.vid');if(!b)return;
  openTheater(b)});
+document.querySelectorAll('.vid[data-vimeo]').forEach(function(b){var im=b.querySelector('img');if(!im||im.getAttribute('src'))return;
+ fetch('https://vimeo.com/api/oembed.json?width=1280&url='+encodeURIComponent('https://vimeo.com/'+b.dataset.vimeo)).then(function(r){return r.json()}).then(function(d){
+  var u=d&&d.thumbnail_url;if(u)im.src=u.replace(/_\d+x\d+/,'_1280')}).catch(function(){b.classList.add('nopic')})});
 var THUMBS=['maxresdefault','sddefault','hqdefault'];
 function nextThumb(t){
  var m=t.src.match(/\/vi\/([^\/]+)\/(maxresdefault|sddefault|hqdefault)\.jpg/);
