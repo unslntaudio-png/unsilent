@@ -44,6 +44,7 @@ nav.top{position:relative;z-index:20;display:flex;justify-content:space-between;
 .left{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
 .mp{display:flex;flex-wrap:wrap;gap:8px}
 .mp[hidden]{display:none}
+.sec[hidden],.mp a[hidden]{display:none!important}
 .mp a{display:flex;align-items:center;gap:10px;padding:11px 20px;border:1px solid #3a3a40;border-radius:999px;font-family:'Unbounded',sans-serif;font-weight:500;font-size:13px;white-space:nowrap;transition:.25s}
 .mp a:hover,.mp a:focus-visible{background:var(--y);border-color:var(--y);color:var(--bg)}
 .pill{border:1px solid #3a3a40;border-radius:999px;padding:12px 26px;font-size:15px;transition:.25s}
@@ -221,6 +222,7 @@ footer{padding-bottom:calc(86px + env(safe-area-inset-bottom))}
 <div class="mp" id="mp" role="menu">
 <a href="#ads" role="menuitem">Music for Commercials</a>
 <a href="#series" role="menuitem">Music for TV Shows</a>
+<a href="#social" role="menuitem" id="nav-social" hidden>Music for Social</a>
 <a href="#about" role="menuitem">About</a>
 </div></div>
 <a class="pill" href="#contact">Let's talk</a>
@@ -239,9 +241,13 @@ footer{padding-bottom:calc(86px + env(safe-area-inset-bottom))}
 <div class="sh"><span>02</span><h2 class="h2">Music for TV Shows</h2></div>
 <div id="w-series"></div>
 </section>
+<section id="social" class="sec pad" hidden>
+<div class="sh"><span>03</span><h2 class="h2">Music for Social</h2></div>
+<div id="w-social"></div>
+</section>
 <section class="rv" id="studio"><div class="stick"><div class="sq" role="img" aria-label="Music production studio, black and white photograph"><div class="im"></div></div></div></section>
 <section id="about" class="sec pad">
-<div class="sh"><span>03</span><h2 class="h2">About</h2></div>
+<div class="sh"><span class="abn">03</span><h2 class="h2">About</h2></div>
 <div class="ab">
 <p class="lead">We make brands <em>heard.</em></p>
 <div class="abt">
@@ -262,7 +268,7 @@ footer{padding-bottom:calc(86px + env(safe-area-inset-bottom))}
 <nav class="cta" id="cta" aria-label="Quick contact"><a href="tel:+972509150047">Call</a><a class="wa" href="https://wa.me/972509150047?text=Hi%20Tom%2C%20I%27d%20like%20to%20talk%20about%20music%20for%20a%20project." target="_blank" rel="noopener">WhatsApp</a><a href="mailto:unslnt.audio@gmail.com">Email</a></nav>
 <script>
 /* ===== PORTFOLIO — add new works here =====
-   cat: 'ads' or 'series'  |  id: YouTube video id (the part after v=)  |  or vimeo: Vimeo video id
+   cat: 'ads', 'series' or 'social'  |  id: YouTube video id (the part after v=)  |  or vimeo: Vimeo video id
    title / sub: text shown on the card  |  thumb: optional custom image (path or URL)
    Both categories use the same card layout. */
 var WORKS=[
@@ -271,7 +277,7 @@ var WORKS=[
  {cat:'series',id:'anj3M--m2ts',title:'Kfula 5',sub:'Noa Kirel \u2014 Childhood Song'},
  {cat:'series',id:'cltivBGwDBA',title:'Kfula 5',sub:'You'}
 ];
-var CATS={ads:{el:'w-ads',feature:false},series:{el:'w-series',feature:false}},LIMIT=6;
+var CATS={ads:{el:'w-ads',feature:false},series:{el:'w-series',feature:false},social:{el:'w-social',feature:false}},LIMIT=6;
 var PLAY='<span class="pl"><svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#08080a"/></svg></span>';
 function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function vid(w){var v=w.vimeo?' data-vimeo="'+w.vimeo+'"':'';return '<div class="vwrap"><button class="vid" data-id="'+(w.id||'')+'"'+v+' aria-label="Play video: '+esc(w.title+' - '+(w.sub||''))+'"><img '+(w.vimeo&&!w.thumb?'':'src="'+(w.thumb||'https://i.ytimg.com/vi/'+w.id+'/maxresdefault.jpg')+'" ')+'alt="" loading="lazy">'+PLAY+'</button></div>'}
@@ -287,6 +293,10 @@ function render(cat,all){
  if(!all&&list.length>LIMIT)h+='<button class="more" data-cat="'+cat+'">Show all ('+list.length+')</button>';
  el.innerHTML=h}
 Object.keys(CATS).forEach(function(k){render(k,false)});
+/* Music for Social stays hidden (section + menu link) until at least one work with cat:'social' exists */
+(function(){var has=WORKS.some(function(w){return w.cat==='social'});
+ var sec=document.getElementById('social'),nv=document.getElementById('nav-social');
+ if(has){sec.hidden=false;nv.hidden=false;document.querySelector('.abn').textContent='04'}})();
 var theater=null,theaterBtn=null,theaterCard=null,reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 function cardTransform(frame){
  var c=theaterCard.getBoundingClientRect(),f=frame.getBoundingClientRect();
