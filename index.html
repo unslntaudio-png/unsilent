@@ -23,14 +23,14 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" as="image" href="logo-y.webp" fetchpriority="high">
-<link rel="preload" as="image" href="logo-w.webp">
+<link rel="preload" as="image" href="logo-y.webp?v=5" fetchpriority="high">
+<link rel="preload" as="image" href="logo-w.webp?v=5">
 <link rel="preconnect" href="https://i.ytimg.com">
 <link rel="preconnect" href="https://i.vimeocdn.com">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&family=Heebo:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-:root{--y:#e2dc00;--bg:#08080a;--ink:#f3f1ea;--line:#26262b;--logoY:url(logo-y.webp);--logoW:url(logo-w.webp)}
+:root{--y:#e2dc00;--bg:#08080a;--ink:#f3f1ea;--line:#26262b;--logoY:url(logo-y.webp?v=5);--logoW:url(logo-w.webp?v=5)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:'Heebo',system-ui,sans-serif;overflow-x:clip}
 a{color:inherit;text-decoration:none}
@@ -348,6 +348,14 @@ body::after{content:"";position:fixed;inset:0;z-index:15;pointer-events:none;opa
 .contact .mail:hover{color:var(--y)}
 .contact .who{margin-top:14px;font-size:15px;color:#7a7a82}
 @media (max-width:820px){.cact{margin-top:30px}.cact .big,.cact .tel{width:100%;justify-content:center;text-align:center}.cact .telw{width:100%}.contact .mail{margin-top:30px}}
+
+/* v5 */
+footer{padding-bottom:calc(100px + env(safe-area-inset-bottom))!important}
+.clients{text-align:center}
+.clients .k{text-align:center;font-weight:300;letter-spacing:.34em}
+.clients ul{justify-content:center;gap:20px 64px}
+.clients li{font-family:inherit;font-weight:200;font-size:clamp(16px,2vw,26px);letter-spacing:.28em;color:#8a8a92;text-transform:uppercase}
+.clients li:last-child{text-transform:uppercase}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "UNSLNT.", "url": "https://unslnt.netlify.app/", "description": "UNSLNT is a sync music studio founded by Tom Rosenberg. Original music for film, television, advertising and visual storytelling.", "email": "unslnt.audio@gmail.com", "telephone": "+972509150047", "founder": {"@type": "Person", "name": "Tom Rosenberg"}}</script>
 </head>
@@ -397,11 +405,11 @@ body::after{content:"";position:fixed;inset:0;z-index:15;pointer-events:none;opa
 <section id="contact" class="contact pad">
 <div class="k uf">CONTACT</div>
 <h2 class="cth">Got a story to score?<br><em>Let's talk.</em></h2>
-<div class="cact"><a class="big" href="mailto:unslnt.audio@gmail.com">Email Tom<span aria-hidden="true">&nearr;</span></a>
+<div class="cact"><a class="big" href="mailto:unslnt.audio@gmail.com">Email us<span aria-hidden="true">&nearr;</span></a>
 <div class="telw"><button class="tel" id="telb" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="telm">+972-50-915-0047</button><div class="telm" id="telm" role="dialog" aria-modal="true" aria-label="Contact Tom" hidden><div class="tt">+972-50-915-0047</div><a href="tel:+972509150047">Call</a><a href="sms:+972509150047">Send SMS</a><a href="https://wa.me/972509150047?text=Hi%20Tom%2C%20I%27d%20like%20to%20talk%20about%20music%20for%20a%20project." target="_blank" rel="noopener">WhatsApp</a><button type="button" class="tx" id="telx">Close</button></div></div>
 </div>
 <a class="mail" href="mailto:unslnt.audio@gmail.com">unslnt.audio<wbr>@gmail.com</a>
-<div class="who">Tom Rosenberg · Sync, score &amp; sound</div>
+<div class="who">UNSLNT. · Film scoring · TV · Advertising · Sync</div>
 </section>
 </main>
 <section class="clients pad" aria-label="Selected clients"><div class="k uf">WORKED WITH</div><ul><li>Castro</li><li>Urbanica</li><li>HOT</li><li>yes</li></ul></section>
