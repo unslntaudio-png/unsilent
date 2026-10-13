@@ -327,6 +327,27 @@ body::after{content:"";position:fixed;inset:0;z-index:15;pointer-events:none;opa
 @media (min-width:821px){.mail{font-size:clamp(17px,6.4vw,104px);line-height:1.02;letter-spacing:-.04em;background:linear-gradient(var(--y),var(--y)) 0 100%/0 .06em no-repeat;transition:color .3s,background-size .7s cubic-bezier(.16,1,.3,1);padding-bottom:.1em}.mail:hover{background-size:100% .06em}}
 .contact .k{margin-bottom:10px}
 @media (prefers-reduced-motion:reduce){.sh:after{scale:1 1;transition:none}.js .lead .w{opacity:1;transition:none}}
+
+/* about + contact v4 */
+.ab{grid-template-columns:1fr!important;gap:34px!important}
+.abt{max-width:760px}
+@media (max-width:820px){.ab .lead{white-space:nowrap;font-size:clamp(18px,6.3vw,30px)}}
+@media (min-width:821px){.ab .lead{white-space:nowrap;font-size:clamp(28px,4.4vw,62px)}}
+.contact .cth{margin:6px 0 0;font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(34px,7.4vw,120px);letter-spacing:-.045em;line-height:.98}
+.contact .cth:hover{transform:none;color:var(--ink)}
+.contact .cth em{font-style:normal;color:var(--y)}
+.cact{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:44px}
+.cact .big{display:inline-flex;align-items:center;gap:14px;padding:22px 38px;border-radius:999px;background:var(--y);color:var(--bg);font-family:'Unbounded',sans-serif;font-weight:700;font-size:clamp(15px,1.6vw,20px);transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s}
+.cact .big span{display:inline-block;font-size:1.3em;line-height:1;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.cact .big:hover{transform:translateY(-3px);box-shadow:0 18px 40px -16px #e2dc0099}
+.cact .big:hover span{transform:translate(4px,-4px)}
+.cact .telw{display:inline-block}
+.cact .tel{margin:0;padding:21px 32px;border:1px solid #3a3a42;border-radius:999px;color:var(--ink);font-size:clamp(14px,1.5vw,19px);transition:border-color .3s,color .3s}
+.cact .tel:hover{border-color:var(--y);color:var(--y)}
+.contact .mail{margin-top:46px;font-size:clamp(16px,2.4vw,30px)!important;letter-spacing:-.01em;color:#a8a6a0}
+.contact .mail:hover{color:var(--y)}
+.contact .who{margin-top:14px;font-size:15px;color:#7a7a82}
+@media (max-width:820px){.cact{margin-top:30px}.cact .big,.cact .tel{width:100%;justify-content:center;text-align:center}.cact .telw{width:100%}.contact .mail{margin-top:30px}}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "UNSLNT.", "url": "https://unslnt.netlify.app/", "description": "UNSLNT is a sync music studio founded by Tom Rosenberg. Original music for film, television, advertising and visual storytelling.", "email": "unslnt.audio@gmail.com", "telephone": "+972509150047", "founder": {"@type": "Person", "name": "Tom Rosenberg"}}</script>
 </head>
@@ -375,9 +396,12 @@ body::after{content:"";position:fixed;inset:0;z-index:15;pointer-events:none;opa
 </section>
 <section id="contact" class="contact pad">
 <div class="k uf">CONTACT</div>
-<div class="who">Tom Rosenberg</div>
-<a class="mail" href="mailto:unslnt.audio@gmail.com">unslnt.audio<wbr>@gmail.com</a>
+<h2 class="cth">Got a story to score?<br><em>Let's talk.</em></h2>
+<div class="cact"><a class="big" href="mailto:unslnt.audio@gmail.com">Email Tom<span aria-hidden="true">&nearr;</span></a>
 <div class="telw"><button class="tel" id="telb" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="telm">+972-50-915-0047</button><div class="telm" id="telm" role="dialog" aria-modal="true" aria-label="Contact Tom" hidden><div class="tt">+972-50-915-0047</div><a href="tel:+972509150047">Call</a><a href="sms:+972509150047">Send SMS</a><a href="https://wa.me/972509150047?text=Hi%20Tom%2C%20I%27d%20like%20to%20talk%20about%20music%20for%20a%20project." target="_blank" rel="noopener">WhatsApp</a><button type="button" class="tx" id="telx">Close</button></div></div>
+</div>
+<a class="mail" href="mailto:unslnt.audio@gmail.com">unslnt.audio<wbr>@gmail.com</a>
+<div class="who">Tom Rosenberg · Sync, score &amp; sound</div>
 </section>
 </main>
 <section class="clients pad" aria-label="Selected clients"><div class="k uf">WORKED WITH</div><ul><li>Castro</li><li>Urbanica</li><li>HOT</li><li>yes</li></ul></section>
