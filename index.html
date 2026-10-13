@@ -429,7 +429,7 @@ footer{padding-bottom:calc(100px + env(safe-area-inset-bottom))!important}
 </section>
 </main>
 <section class="clients pad" aria-label="Selected clients"><div class="k uf">WORKED WITH</div><ul><li><img src="cl-castro.webp" alt="Castro" width="329" height="140" loading="lazy" style="--h:60px"></li><li><img src="cl-urbanica.webp" alt="Urbanica" width="1261" height="140" loading="lazy" style="--h:26px"></li><li><img src="cl-hot.webp" alt="HOT" width="126" height="140" loading="lazy" style="--h:54px"></li><li><img src="cl-yes.webp" alt="yes" width="352" height="140" loading="lazy" style="--h:40px"></li></ul></section>
-<footer class="pad"><i role="img" aria-label="UNSLNT."></i><span class="uf">© 2026 UNSLNT. · Sync · Score · Sound</span></footer>
+<footer class="pad"><i role="img" aria-label="UNSLNT."></i><span class="uf">© 2026 UNSLNT. · Sync · Score · Sound · <a href="accessibility.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Accessibility</a></span></footer>
 <nav class="cta" id="cta" aria-label="Quick contact"><a href="tel:+972509150047">Call</a><a class="wa" href="https://wa.me/972509150047?text=Hi%20Tom%2C%20I%27d%20like%20to%20talk%20about%20music%20for%20a%20project." target="_blank" rel="noopener">WhatsApp</a><a href="mailto:unslnt.audio@gmail.com">Email</a></nav>
 <button class="a11y-b" id="a11yb" type="button" aria-label="Accessibility options" aria-haspopup="dialog" aria-expanded="false" aria-controls="a11yp"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="4.5" r="2.2"/><path d="M4 8.2c0-.6.5-1 1-1h14c.6 0 1 .5 1 1s-.5 1-1 1h-5v3.3l2.2 7.2c.2.6-.2 1.3-.8 1.4-.6.2-1.2-.2-1.4-.8L12 14.7l-1.9 5.6c-.2.6-.8 1-1.4.8-.6-.1-1-.8-.8-1.4l2.1-7.2V9.2H5c-.6 0-1-.4-1-1z"/></svg></button>
 <div class="a11y-p" id="a11yp" role="dialog" aria-label="Accessibility options" hidden><h2>Accessibility</h2><div class="a11y-g">
@@ -647,6 +647,16 @@ document.addEventListener('error',function(e){var t=e.target;if(isThumb(t))nextT
 (function(){var m=document.querySelector('.mq');if(!m)return;m.setAttribute('role','button');m.setAttribute('tabindex','0');m.setAttribute('aria-pressed','false');m.setAttribute('aria-label','Pause or resume the scrolling text');
  function tg(){var p=m.classList.toggle('p');m.setAttribute('aria-pressed',p?'true':'false')}
  m.addEventListener('click',tg);m.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tg()}})})();
+</script>
+<script>
+/* Google Analytics 4: put the Measurement ID (G-XXXXXXXXXX) here to switch it on */
+(function(){var GA_ID='';if(!GA_ID)return;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;document.head.appendChild(s);
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}window.gtag=gtag;gtag('js',new Date());gtag('config',GA_ID,{anonymize_ip:true});
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a,button');if(!a)return;
+ if(a.classList.contains('vid'))gtag('event','play_video',{video_title:(a.getAttribute('aria-label')||'').replace('Play video: ','')});
+ else if(a.classList.contains('big')||(a.href||'').indexOf('mailto:')===0)gtag('event','click_email');
+ else if((a.href||'').indexOf('wa.me')>-1)gtag('event','click_whatsapp');
+ else if((a.href||'').indexOf('tel:')===0||(a.href||'').indexOf('sms:')===0)gtag('event','click_phone')})})();
 </script>
 </body>
 </html>
