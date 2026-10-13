@@ -403,16 +403,15 @@ function openTheater(b){
  var frame=theater.querySelector('.tframe'),box=theater.querySelector('.tvid'),started=false;
  function start(){if(started||!theater)return;started=true;
   var f=document.createElement('iframe');
-  f.src=vm?'https://player.vimeo.com/video/'+vm+'?autoplay=1&title=0&byline=0&portrait=0':'https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&playsinline=1&origin='+encodeURIComponent(location.origin);
+  f.src=vm?'https://player.vimeo.com/video/'+vm+'?autoplay=1&muted=0&playsinline=1&title=0&byline=0&portrait=0':'https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&playsinline=1&origin='+encodeURIComponent(location.origin);
   f.title=title;f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;f.referrerPolicy='strict-origin-when-cross-origin';
-  box.innerHTML='';box.appendChild(f)}
+  box.appendChild(f)}
  if(reduce){theater.classList.add('on');start()}
  else{
   frame.style.transition='none';frame.style.transform=cardTransform(frame);
   void frame.offsetWidth;
   frame.style.transition='';frame.style.transform='none';theater.classList.add('on');
-  frame.addEventListener('transitionend',function(e){if(e.target===frame)start()},{once:true});
-  setTimeout(start,700)}
+  start()}
  theater.querySelector('.tclose').focus();
  theater.addEventListener('click',function(e){if(e.target===theater||e.target.closest('.tclose'))closeTheater()})}
 function closeTheater(){
